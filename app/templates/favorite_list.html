@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm p-4 bg-white rounded">
+            <h1 class="text-center text-primary mb-4">お気に入りリスト一覧</h1>
+                {% for favorite in favorite_list %}
+                    <p>{{ favorite.title }}: {{ favorite.url }}</p>
+                    <form action="{{ url_for('main.delete_favorite', favorite_id = favorite.id)}}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-outline-success ms-2">削除する</button>
+                    </form>
+                {% endfor %}
+                <a href="{{ url_for('main.get_articles') }}">最新技術記事一覧へ</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

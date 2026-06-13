@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm p-4 bg-white rounded">
+            <h1 class="text-center text-primary mb-4">最新技術記事一覧</h1>
+            <form action="{{ url_for('main.list_favorite') }}" method="GET" style="display: inline;">
+
+                        <button type="submit" class="btn btn-sm btn-outline-success ms-2">お気に入りリスト</button>
+
+            </form>
+            {% for article in articles %}
+                <p>
+                    {{ article.title }}: <a href = "{{ article.url }}">リンク</a>
+                    <form action="{{ url_for('main.add_favorite') }}" method="POST" style="display:inline;">
+
+                        <input type="hidden" name="title" value="{{ article.title }}">
+                        <input type="hidden" name="url" value="{{ article.url }}">
+                        
+                        <button type="submit" class="btn btn-sm btn-outline-success ms-2">⭐ お気に入り</button>
+
+                    </form>
+                </p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
