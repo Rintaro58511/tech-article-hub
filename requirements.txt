@@ -1,0 +1,3 @@
+python pip install
+
+pip install flask, flask-sqlalchemy, flask-login, flask-wtf
