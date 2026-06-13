@@ -8,4 +8,4 @@ class Favorite(db.Model):
 
     title = db.Column(db.String(500))
 
-    url = db.Column(db.String)
+    url = db.Column(db.String, unique = True)

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, Blueprint, redirect, request, url_for
+from flask import Flask, render_template, Blueprint, redirect, request, url_for, flash
 from main.model import Favorite, db
 import requests
 
@@ -26,6 +26,10 @@ def add_favorite():
         title = request.form['title']
         url = request.form['url']
 
+        if (Favorite.query.filter_by(url = url).first() != None):
+            flash("既に登録しています")
+            return redirect(url_for("main.get_articles"))
+        
         favorite = Favorite(title = title, url = url)
 
         db.session.add(favorite)
