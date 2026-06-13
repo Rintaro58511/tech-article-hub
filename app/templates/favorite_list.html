@@ -6,7 +6,9 @@
         <div class="card shadow-sm p-4 bg-white rounded">
             <h1 class="text-center text-primary mb-4">お気に入りリスト一覧</h1>
                 {% for favorite in favorite_list %}
-                    <p>{{ favorite.title }}: {{ favorite.url }}</p>
+                    <p>{{ favorite.title }} : 
+                        <a href="{{ favorite.url }}">ページへ飛ぶ</a> : 
+                        {{ favorite.regist_date }}</p>
                     <form action="{{ url_for('main.delete_favorite', favorite_id = favorite.id)}}" method="POST" style="display:inline;">
                         <button type="submit" class="btn btn-sm btn-outline-success ms-2">削除する</button>
                     </form>
