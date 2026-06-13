@@ -4,19 +4,25 @@ import requests
 
 main_bp = Blueprint('main', __name__, url_prefix = '/main')
 
-@main_bp.route("/")
+@main_bp.route("/", methods = ["GET"])
 def get_articles():
 
-    response = requests.get("https://qiita.com/api/v2/items?query=python&per_page=5")
+    key_word = request.args.get('keyword')
+
+    if key_word != None:
+        response = requests.get(f"https://qiita.com/api/v2/items?query={key_word}&per_page=5")
+
+    else:
+        response = requests.get("https://qiita.com/api/v2/items?query=python&per_page=5")
+
     qiita_data = response.json()
 
     clean_articles = []
 
     for item in qiita_data:
-        clean_articles.append({"title": item["title"],
-                               "url": item["url"]})
+        clean_articles.append({"title": item["title"], "url": item["url"]})
         
-    return render_template("index.html", articles = clean_articles)
+    return render_template("index.html", articles = clean_articles, key_word = key_word)
 
 
 @main_bp.route("/favorite/add", methods=["POST"])
