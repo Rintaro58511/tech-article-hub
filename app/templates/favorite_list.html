@@ -5,6 +5,13 @@
     <div class="col-md-8">
         <div class="card shadow-sm p-4 bg-white rounded">
             <h1 class="text-center text-primary mb-4">お気に入りリスト一覧</h1>
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-warning">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
                 {% for favorite in favorite_list %}
                     <p>{{ favorite.title }} : 
                         <a href="{{ favorite.url }}">ページへ飛ぶ</a> : 

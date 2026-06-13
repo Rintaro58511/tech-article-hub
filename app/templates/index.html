@@ -5,13 +5,13 @@
     <div class="col-md-8">
         <div class="card shadow-sm p-4 bg-white rounded">
             <h1 class="text-center text-primary mb-4">最新技術記事一覧</h1>
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    {% for message in messages %}
-                        <div class="alert alert-warning">{{ message }}</div>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-warning">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
             <form action="{{ url_for('main.list_favorite') }}" method="GET" style="display: inline;">
 
                         <button type="submit" class="btn btn-sm btn-outline-success ms-2">お気に入りリスト</button>

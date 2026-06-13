@@ -45,6 +45,7 @@ def list_favorite():
 
     return render_template("favorite_list.html", favorite_list = favorite_list)
 
+
 @main_bp.route("/favorite/delete/<int:favorite_id>", methods = ["POST"])
 def delete_favorite(favorite_id):
 
@@ -53,5 +54,7 @@ def delete_favorite(favorite_id):
 
         db.session.delete(target_article)
         db.session.commit()
+
+        flash(f"{target_article.title}を削除しました")
 
     return redirect( url_for("main.list_favorite") )
