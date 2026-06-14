@@ -5,10 +5,10 @@
     <div class="col-md-8">
         <div class="card shadow-sm p-4 bg-white rounded">
             <h1 class="text-center text-primary mb-4">最新技術記事一覧</h1>
-            <form action="{{ url_for('main.get_articles') }}" method="GET" style="display: inline;">
+            <form action="{{ url_for('main.get_articles') }}" method="GET" class="d-flex" style="max-width: 500px;">
 
-                <input type="text" name="keyword" placeholder="知りたい記事について検索して下さい" value="{{ key_word }}" class="form-control me-2">
-                <button type="submit" class="btn btn-primary">検索</button>
+                <input type="text" name="keyword" placeholder="知りたい記事について検索して下さい" value="{{ key_word }}" class="form-control form-control-sm me-2">
+                <button type="submit" class="btn btn-primary btn-sm text-nowrap">検索</button>
 
             </form>
                 {% with messages = get_flashed_messages() %}
@@ -20,12 +20,13 @@
                 {% endwith %}
             <form action="{{ url_for('main.list_favorite') }}" method="GET" style="display: inline;">
 
-                        <button type="submit" class="btn btn-sm btn-outline-success ms-2">お気に入りリスト</button>
+                        <button type="submit" class="btn btn-sm btn-outline-success ms-2 mb-4 mt-4">お気に入りリスト</button>
 
             </form>
+
             {% for article in articles %}
                 <p>
-                    {{ article.title }}: <a href = "{{ article.url }}">リンク</a>
+                    {{ article.title }}： <a href = "{{ article.url }}">リンク</a>
                     <form action="{{ url_for('main.add_favorite') }}" method="POST" style="display:inline;">
 
                         <input type="hidden" name="title" value="{{ article.title }}">

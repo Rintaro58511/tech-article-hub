@@ -10,7 +10,7 @@ def get_articles():
     key_word = request.args.get('keyword')
 
     if key_word != None:
-        response = requests.get(f"https://qiita.com/api/v2/items?query={key_word}&per_page=5")
+        response = requests.get(f"https://qiita.com/api/v2/items?query={key_word}&sort=count&per_page=5")
 
     else:
         response = requests.get("https://qiita.com/api/v2/items?query=python&per_page=5")
