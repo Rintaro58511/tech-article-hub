@@ -1,6 +1,6 @@
 from flask import Blueprint, redirect, flash, render_template, url_for
 from model import db, User
-from flask_login import login_user
+from flask_login import login_user, logout_user
 from forms import SignUpForm, LoginForm
 
 auth_bp = Blueprint('auth', __name__, url_prefix = '/auth')
@@ -48,3 +48,11 @@ def sign_up():
         
     return render_template("auth/signup.html", form=form)
 
+
+@auth_bp.route("/logout", methods = ["GET"])
+def logout():
+
+    logout_user()
+    flash("ログアウトしました")
+
+    return redirect(url_for("auth.login"))

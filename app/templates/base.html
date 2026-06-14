@@ -11,6 +11,16 @@
     <nav class="navbar navbar-dark bg-dark mb-4">
         <div class="container">
             <a class="navbar-brand font-weight-bold" href="/">🚀 Tech Article Hub</a>
+            <div class="navbar-nav flex-row">
+            {% if current_user.is_authenticated %}
+                <span class="text-light me-3">こんにちは、{{ current_user.user_name }} さん</span>
+                <a class="btn btn-outline-light btn-sm" href="{{ url_for('auth.logout') }}">ログアウト</a>
+            
+            {% else %}
+                <a class="btn btn-outline-light btn-sm me-2" href="{{ url_for('auth.login') }}">ログイン</a>
+                <a class="btn btn-light btn-sm" href="{{ url_for('auth.sign_up') }}">新規登録</a>
+            {% endif %}
+        </div>
         </div>
     </nav>
 
