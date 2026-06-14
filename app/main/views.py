@@ -1,5 +1,5 @@
-from flask import Flask, render_template, Blueprint, redirect, request, url_for, flash
-from main.model import Favorite, db
+from flask import render_template, Blueprint, redirect, request, url_for, flash
+from model import Favorite, db
 import requests
 
 main_bp = Blueprint('main', __name__, url_prefix = '/main')
@@ -22,7 +22,7 @@ def get_articles():
     for item in qiita_data:
         clean_articles.append({"title": item["title"], "url": item["url"]})
         
-    return render_template("index.html", articles = clean_articles, key_word = key_word)
+    return render_template("main/index.html", articles = clean_articles, key_word = key_word)
 
 
 @main_bp.route("/favorite/add", methods=["POST"])
@@ -49,7 +49,7 @@ def list_favorite():
 
     favorite_list = Favorite.query.all()
 
-    return render_template("favorite_list.html", favorite_list = favorite_list)
+    return render_template("main/favorite_list.html", favorite_list = favorite_list)
 
 
 @main_bp.route("/favorite/delete/<int:favorite_id>", methods = ["POST"])

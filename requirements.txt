@@ -4,3 +4,5 @@ flask-login
 flask-wtf
 requests
 flask-sqlalchemy
+Flask-login
+Flask-WTF

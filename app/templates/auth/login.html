@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5" style="max-width: 400px;">
+    <h1>ログイン画面</h1>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-warning">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
+    <form method="POST"> {{ form.csrf_token }}
+        
+        <div class="mb-3">
+            <label class="form-label">ユーザー名</label>
+            {{ form.user_name(class="form-control") }}
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label">パスワード</label>
+            {{ form.password(class="form-control") }}
+        </div>
+        
+        <button type="submit" class="btn btn-primary w-100">ログイン</button>
+    </form>
+</div>
+{% endblock %}
