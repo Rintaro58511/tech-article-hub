@@ -16,6 +16,8 @@ class Favorite(db.Model):
 
     regist_date = db.Column(db.DateTime, default = datetime.now)
 
+    category = db.Column(db.String(100), default = "未分類")
+
 
 
 class User(db.Model, UserMixin):

@@ -6,3 +6,5 @@ requests
 flask-sqlalchemy
 Flask-login
 Flask-WTF
+scikit-learn
+pandas

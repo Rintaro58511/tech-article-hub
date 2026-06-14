@@ -1,6 +1,7 @@
 from flask import render_template, Blueprint, redirect, request, url_for, flash
 from model import Favorite, db
 import requests
+from main import ai_model
 
 main_bp = Blueprint('main', __name__, url_prefix = '/main')
 
@@ -36,7 +37,9 @@ def add_favorite():
             flash("既に登録しています")
             return redirect(url_for("main.get_articles"))
         
-        favorite = Favorite(title = title, url = url)
+        category = categorize_favorite(title)
+        
+        favorite = Favorite(title = title, url = url, category = category)
 
         db.session.add(favorite)
         db.session.commit()
@@ -61,6 +64,12 @@ def delete_favorite(favorite_id):
         db.session.delete(target_article)
         db.session.commit()
 
-        flash(f"{target_article.title}を削除しました")
+        flash(f"「{target_article.title}」を削除しました")
 
     return redirect( url_for("main.list_favorite") )
+
+def categorize_favorite(title):
+
+    category = ai_model.categorize_ai(title)
+
+    return category

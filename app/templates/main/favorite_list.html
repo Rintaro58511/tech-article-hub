@@ -15,7 +15,9 @@
             {% for favorite in favorite_list %}
                 <p>{{ favorite.title }} : 
                     <a href="{{ favorite.url }}">ページへ飛ぶ</a> : 
-                    {{ favorite.regist_date }}</p>
+                    {{ favorite.regist_date }} : 
+                    [{{ favorite.category }}]
+                </p>
                 <form action="{{ url_for('main.delete_favorite', favorite_id = favorite.id)}}" method="POST" style="display:inline;">
                     <button type="submit" class="btn btn-sm btn-outline-success ms-2">削除する</button>
                 </form>
