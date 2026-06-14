@@ -24,7 +24,6 @@ tech-article-hub/
 ├── Dockerfile               # Flaskアプリをコンテナ化するための設計図
 ├── docker-compose.yml       # コンテナの起動や環境を管理する設定ファイル
 ├── requirements.txt         # 依存ライブラリ一覧
-├── test_ai.py               # 🧪 実験室：AIを学習させて.pklファイルを出力するスクリプト
 └── app/                     # 📦 アプリのメインディレクトリ
     ├── __init__.py          # アプリ全体の初期化・Blueprint登録を行う核
     ├── models.py            # 💾 データベースの設計図（共通のモデル定義）
