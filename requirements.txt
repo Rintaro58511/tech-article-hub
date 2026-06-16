@@ -8,3 +8,5 @@ Flask-login
 Flask-WTF
 scikit-learn
 pandas
+pytest
+Flask-Migrate

@@ -1,4 +1,5 @@
 from flask import render_template, Blueprint, redirect, request, url_for, flash
+import logging
 from model import Favorite, db
 import requests
 from main import ai_model
@@ -10,20 +11,34 @@ def get_articles():
 
     key_word = request.args.get('keyword')
 
-    if key_word != None:
-        response = requests.get(f"https://qiita.com/api/v2/items?query={key_word}&sort=count&per_page=5")
+    clean_articles = fetch_qiita_article(key_word)
 
-    else:
-        response = requests.get("https://qiita.com/api/v2/items?query=python&per_page=5")
+    if clean_articles is None:
+        flash("通信エラーが発生しました")
 
-    qiita_data = response.json()
-
-    clean_articles = []
-
-    for item in qiita_data:
-        clean_articles.append({"title": item["title"], "url": item["url"]})
-        
     return render_template("main/index.html", articles = clean_articles, key_word = key_word)
+
+def fetch_qiita_article(key_word) -> list:
+
+    try:
+
+        if key_word:
+            response = requests.get(f"https://qiita.com/api/v2/items?query={key_word}&sort=count&per_page=5")
+
+        else:
+            response = requests.get("https://qiita.com/api/v2/items?query=python&per_page=5")
+
+        qiita_data = response.json()
+
+    except requests.exceptions.ConnectionError as e:
+
+        logging.error(f"Qiita API通信エラーが発生しました。詳細: {e}")
+
+        return None
+
+    clean_articles = [{"title" : item["title"], "url" : item["url"]} for item in qiita_data]
+
+    return clean_articles
 
 
 @main_bp.route("/favorite/add", methods=["POST"])
@@ -68,7 +83,7 @@ def delete_favorite(favorite_id):
 
     return redirect( url_for("main.list_favorite") )
 
-def categorize_favorite(title):
+def categorize_favorite(title: str) -> str:
 
     category = ai_model.categorize_ai(title)
 

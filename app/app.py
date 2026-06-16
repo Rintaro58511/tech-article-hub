@@ -1,9 +1,9 @@
 from flask import Flask
 from model import db, User
 from flask_login import LoginManager
+from flask_migrate import Migrate
 from main.views import main_bp
 from auth.views import auth_bp
-
 
 app = Flask(__name__)
 
@@ -18,8 +18,7 @@ def load_user(user_id: int) -> User:
     return User.query.get(int(user_id))
 
 db.init_app(app)
-with app.app_context():
-    db.create_all()
+Migrate(app, db)
 
 app.register_blueprint(main_bp)
 app.register_blueprint(auth_bp)
