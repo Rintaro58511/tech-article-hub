@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tech Article Hub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light p-4">
+
+    <nav class="mb-4 d-flex justify-content-between align-items-center">
+        <a href="/" class="fs-4 fw-bold text-decoration-none text-dark">🚀 Tech Article Hub</a>
+        <span class="text-muted">こんにちは、ゲスト さん</span>
+    </nav>
+    <hr>
+
+    <div class="mx-auto" style="max-width: 600px;">
+
+        <h2 class="fs-4 mb-3">記事を検索する</h2>
+        <form id="searchForm" class="d-flex gap-2 mb-4">
+            <input type="text" id="keyword" class="form-control py-2" placeholder="知りたい記事について検索して下さい" required>
+            <button type="submit" class="btn btn-primary px-4">検索</button>
+        </form>
+
+        <div id="articlesList" class="mb-4"></div>
+
+        <hr class="my-4">
+
+        <h2 class="fs-4 mb-3">お気に入りリスト一覧</h2>
+        <div id="favoritesList">
+            </div>
+
+    </div>
+
+    <script src="favorite.js"></script>
+</body>
+</html>

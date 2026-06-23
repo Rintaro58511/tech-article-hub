@@ -10,3 +10,9 @@ scikit-learn
 pandas
 pytest
 Flask-Migrate
+fastapi
+uvicorn
+httpx
+sqlalchemy
+aiosqlite
+pwdlib[argon2]
